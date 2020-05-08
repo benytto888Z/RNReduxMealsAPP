@@ -1,27 +1,24 @@
 import React from 'react';
 import { StyleSheet, Text, View,FlatList,TouchableOpacity,Platform} from 'react-native';
-
+import CategoryGridTile from "../components/CategoryGridTile";
 import {CATEGORIES} from "../data/dummy-data";
-import Colors from "../constants/Colors";
+import {HeaderButtons,Item} from "react-navigation-header-buttons";
+import HeaderButton from "../components/HeaderButton";
+
 
 
 const CategoriesScreen=props=> {
-
     const renderGridItem = (itemData)=>{
         return (
-            <TouchableOpacity
-                style={styles.gridItem}
-                onPress={()=>{
-                props.navigation.navigate('CategoryMeals',itemData.item)
-            }}>
-                <View>
-                    <Text>{itemData.item.title}</Text>
-                </View>
-            </TouchableOpacity>
+            <CategoryGridTile
+                title={itemData.item.title}
+                color={itemData.item.color}
+                onSelect={()=>{
+                props.navigation.navigate('CategoryMeals',{categoryId:itemData.item.id})
+             }}
+            />
         )
-
     };
-
     return (
        <FlatList numColumns={2}
        keyExtractor={(item,index)=>item.id}
@@ -31,12 +28,15 @@ const CategoriesScreen=props=> {
     );
 };
 
-CategoriesScreen.navigationOptions ={
+CategoriesScreen.navigationOptions =(navigationData)=>{
+    return{
     headerTitle: 'Catégories et Spécialités',
-    headerStyle:{
-        backgroundColor:Platform.OS === 'android' ? Colors.primaryColor: ''
-    },
-    headerTintColor: Platform.OS === 'android' ?'white':Colors.primaryColor
+    headerLeft:()=><HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item title='Menu' iconName='ios-menu'
+              onPress={()=>{
+                  navigationData.navigation.toggleDrawer();
+              }}/>
+    </HeaderButtons>}
 };
 
 const styles = StyleSheet.create({
@@ -44,14 +44,7 @@ screen:{
     flex:1,
     justifyContent:'center',
     alignItems:'center',
-},
-    gridItem:{
-    flex:1,
-    margin: 15,
-    height:150,
-    backgroundColor:'yellow',
-
-    }
+}
 });
 
 export default CategoriesScreen;
