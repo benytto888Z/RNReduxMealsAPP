@@ -20,7 +20,8 @@ const defaultStackNavOptions = {
             backgroundColor:Platform.OS === 'android' ? Colors.primaryColor: ''
         },
         headerTitleStyle:{
-            fontFamily:'open-sans-bold'
+            fontFamily:'open-sans-bold',
+            fontSize:16
         },
         headerBackTitleStyle:{
             fontFamily:'open-sans'
@@ -42,7 +43,7 @@ const MealsStackNavigator = createStackNavigator(
         },
         MealDetail: MealDetailScreen,
         }, {
-        // initialRouteName: 'Categories',  // par défaut il y est
+         //initialRouteName: 'Categories',  // par défaut il y est
         //mode:'modal', // apparition d ecran du bas vers le haut ou du haut en bas sur android
         defaultNavigationOptions: defaultStackNavOptions
     }
@@ -98,7 +99,8 @@ const tabScreenConfig= {
             },
             tabBarColor:Colors.accentColor
         }
-    }
+    },
+ 
 };
 
 const MealsFavTabNavigator = Platform.OS === 'android'

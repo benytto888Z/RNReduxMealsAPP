@@ -3,6 +3,9 @@ import { StyleSheet, Text, View,Switch,Platform } from 'react-native';
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
 import Colors from "../constants/Colors";
+import {setFilters} from '../store/actions/meals';
+
+import {useDispatch} from 'react-redux';
 
 const FilterSwitch = props=>{
     return(
@@ -27,6 +30,8 @@ const FiltersScreen=props=> {
     const [isVegan,setIsVegan]=useState(false);
     const [isVegetarian,setIsVegetarian]=useState(false);
 
+    const dispatch = useDispatch();
+
     const saveFilters = useCallback(()=>{ // pour assurer que seul le changement d'état de saveFilters est pris en compte dans useEffect on utilise useCallback.
         const appliedFilters = {
             glutenFree:isGlutenFree,
@@ -35,8 +40,8 @@ const FiltersScreen=props=> {
             vegetarian:isVegetarian
         }
 
-        console.log(appliedFilters);
-    },[isGlutenFree,isVegetarian,isVegan,isLactoseFree]);
+        dispatch(setFilters(appliedFilters));
+    },[isGlutenFree,isVegetarian,isVegan,isLactoseFree,dispatch]);
 
     useEffect(()=>{
         navigation.setParams({save:saveFilters}) //setParams causes the component to rebuild because its props (the navigation prop) change
@@ -84,7 +89,7 @@ const styles = StyleSheet.create({
     },
     title:{
         fontFamily:'open-sans-bold',
-        fontSize:18,
+        fontSize:14,
         margin:20,
         textAlign:'center'
     },

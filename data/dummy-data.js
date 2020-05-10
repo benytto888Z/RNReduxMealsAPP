@@ -281,7 +281,7 @@ export const MEALS = [
             "2 gros blancs d'œufs",
             "1 pincée de crème de tartre",
             "1 cuillère à soupe de sucre blanc"
-        ]
+        ],
         [
             'Préchauffez le four à 190 ° C. Tapisser une plaque à pâtisserie bordée de papier parchemin. ',
             "Badigeonnez légèrement le fond et les côtés de 2 ramequins avec 1 cuillère à café de beurre fondu puis couvrez le fond et les côtés jusqu'au bord.",
